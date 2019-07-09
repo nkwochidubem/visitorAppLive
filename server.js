@@ -25,10 +25,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use(logger('dev'));
-// app.use(express.static(path.join(__dirname, '../public/')));
+app.use(express.static(path.join(__dirname, './public')));
 app.use('/api', router);
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
     const error = new Error('Not Found');
     error.message = 'invalid route';
     error.status = 404;
@@ -42,6 +42,16 @@ app.use((error, req, res) => {
             message: error.message
         }
     });
+}); */
+
+
+// Index Route
+app.get('/', (req, res) => {
+  res.send('invaild endpoint');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 
