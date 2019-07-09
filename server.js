@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
 const path = require('path');
+const bodyParser = require('body-parser');
 
-dataBaseConfig = require('./database/db');
+const dataBaseConfig = require('./database/db');
 const router = require('./src/config/routes');
 const app = express();
 mongoose.Promise = global.Promise;
@@ -18,8 +19,10 @@ mongoose.connect(dataBaseConfig.db, { useNewUrlParser: true }  , err => {
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cors());
 app.use(logger('dev'));
 // app.use(express.static(path.join(__dirname, '../public/')));
