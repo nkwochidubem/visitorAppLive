@@ -5,12 +5,13 @@ const cors = require('cors');
 const logger = require('morgan');
 const path = require('path');
 
+dataBaseConfig = require('./database/db');
 const router = require('./src/config/routes');
 const app = express();
 mongoose.Promise = global.Promise;
 
-// mongodb local connection mongodb://localhost/visitor-list
-mongoose.connect('mongodb://localhost/visitor-list', { useNewUrlParser: true }  , err => {
+// mongodb local connection mongodb://localhost/visitor-list mongodb+srv://nkwochidubem:<password>@cluster0-puljv.azure.mongodb.net/test
+mongoose.connect(dataBaseConfig.db, { useNewUrlParser: true }  , err => {
     if (err) throw err;
     console.log(`Successfully connected to database.`);
 });
