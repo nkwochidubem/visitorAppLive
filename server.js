@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const express = require('express');
+let express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, './public')));
+// app.use(express.static(path.join(__dirname, './public')));
 app.use('/api', router);
 
 /* app.use((req, res, next) => {
@@ -43,6 +43,15 @@ app.use((error, req, res) => {
         }
     });
 }); */
+
+
+// error handler
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
+});
+
 
 
 // Index Route
