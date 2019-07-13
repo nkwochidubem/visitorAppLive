@@ -25,24 +25,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use(logger('dev'));
-// app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './public')));
 app.use('/api', router);
-
-/* app.use((req, res, next) => {
-    const error = new Error('Not Found');
-    error.message = 'invalid route';
-    error.status = 404;
-    next(error);
-});
-
-app.use((error, req, res) => {
-    res.status(error.status || 500);
-    return res.json({
-        error: {
-            message: error.message
-        }
-    });
-}); */
 
 
 // error handler
